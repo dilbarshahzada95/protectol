@@ -165,6 +165,8 @@
                                     icon: "success",
                                     title: "Success!",
                                     text: response.message,
+                                }).then(() => {
+                                    window.open(response.url, '_blank');
                                 });
                             } else {
                                 Swal.fire({

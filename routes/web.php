@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/clear', function () {
+    Artisan::call('cache:clear');
+    Artisan::call('config:cache');
+    Artisan::call('view:clear');
+    Artisan::call('route:clear');
+    Artisan::call('optimize:clear');
+    Artisan::call('optimize');
+    return "Cleared!";
+});
 Route::get('/', function () {
     return view('quiz.registration');
 });
@@ -20,4 +30,9 @@ Route::get('/', function () {
 
 Route::get('/quiz/registration', [App\Http\Controllers\Quiz\RegistrationController::class, 'index']);
 Route::post('/quiz/registration', [App\Http\Controllers\Quiz\RegistrationController::class, 'save']);
-Route::get('/quiz/form', [App\Http\Controllers\Quiz\QuizController::class, 'index']);
+Route::middleware(['enrolled'])->prefix('questionnaire')->group(function () {
+    Route::get('/{uuid}/start', [App\Http\Controllers\Quiz\QuizController::class, 'index']);
+});
+Route::fallback(function () {
+    echo '404';
+});
