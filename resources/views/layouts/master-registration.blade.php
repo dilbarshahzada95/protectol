@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="{{ asset('registration/assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('registration/assets/css/responsive.css') }}" />
     <link rel="stylesheet" href="{{ asset('registration/assets/css/animation.css') }}" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -34,6 +35,7 @@
     <script src="{{ asset('registration/assets/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('registration/assets/js/jquery-3.6.1.min.js') }}"></script>
     <script src="{{ asset('registration/assets/js/custom.js') }}"></script>
+    @yield('scripts')
 
 
 </body>

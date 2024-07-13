@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('quiz/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('quiz/assets/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('quiz/assets/css/style.css') }}">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 

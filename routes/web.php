@@ -19,4 +19,5 @@ Route::get('/', function () {
 
 
 Route::get('/quiz/registration', [App\Http\Controllers\Quiz\RegistrationController::class, 'index']);
+Route::post('/quiz/registration', [App\Http\Controllers\Quiz\RegistrationController::class, 'save']);
 Route::get('/quiz/form', [App\Http\Controllers\Quiz\QuizController::class, 'index']);

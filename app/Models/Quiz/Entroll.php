@@ -6,19 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RegisterdUsers extends Model
+class Entroll extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'registerd_users';
+    protected $table = 'entroll';
 
     protected $fillable = [
-        'name',
-        'company_name',
-        'email',
-        'country',
-        'phone',
-        'comments',
-        'uuid'
+        'uuid',
+        'status'
     ];
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRegisterdUsersTable extends Migration
+class CreateEntrollTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateRegisterdUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('registerd_users', function (Blueprint $table) {
+        Schema::create('entroll', function (Blueprint $table) {
             $table->id();
             $table->string('uuid')->unique()->index();
-            $table->string('name')->index();
-            $table->string('company_name')->index();
-            $table->string('email')->unique()->index();
-            $table->string('country')->nullable()->index();
-            $table->string('phone')->nullable()->index();
-            $table->text('comments')->nullable();
+            $table->enum('status', ['pending', 'completed']);
             $table->softDeletes();
             $table->timestamps();
         });
@@ -34,6 +29,6 @@ class CreateRegisterdUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('registerd_users');
+        Schema::dropIfExists('entroll');
     }
 }
