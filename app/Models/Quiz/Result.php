@@ -6,10 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Options extends Model
+class Result extends Model
 {
     use HasFactory, SoftDeletes;
-    protected $table = 'options';
-
-    protected $fillable = ['option', 'question_id'];
+    protected $table = 'result';
+    protected $fillable = ['uuid', 'question_id', 'answer', 'score', 'is_update'];
 }

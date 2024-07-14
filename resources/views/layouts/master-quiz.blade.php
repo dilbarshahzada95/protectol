@@ -28,6 +28,7 @@
     <script src="{{ asset('quiz/assets/js/jquery.validate.min.js') }}"></script>
     <!-- Custom-js include -->
     <script src="{{ asset('quiz/assets/js/script.js') }}"></script>
+    @yield('scripts')
 </body>
 
 </html>

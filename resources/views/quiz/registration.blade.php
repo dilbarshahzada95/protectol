@@ -88,9 +88,7 @@
         $(document).ready(function() {
             $('#regData').click(function() {
                 let valid = true;
-
-                $('.error-message').text(''); // Clear previous error messages
-
+                $('.error-message').text('');
                 var name = $('#name').val();
                 var company_name = $('#company_name').val();
                 var country = $('#country').val();
