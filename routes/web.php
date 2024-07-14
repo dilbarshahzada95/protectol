@@ -33,8 +33,10 @@ Route::post('/quiz/registration', [App\Http\Controllers\Quiz\RegistrationControl
 Route::middleware(['enrolled'])->prefix('questionnaire')->group(function () {
     Route::get('/{uuid}/start', [App\Http\Controllers\Quiz\QuizController::class, 'index']);
 });
-Route::post('/questionnaire/update', [App\Http\Controllers\Quiz\QuizController::class, 'updateQuiz']);
-Route::post('/questionnaire/save-later', [App\Http\Controllers\Quiz\QuizController::class, 'saveItLater']);
+Route::prefix('questionnaire')->group(function () {
+    Route::post('/update', [App\Http\Controllers\Quiz\QuizController::class, 'updateQuiz']);
+    Route::post('/save-later', [App\Http\Controllers\Quiz\QuizController::class, 'saveItLater']);
+});
 Route::fallback(function () {
     echo '404';
 });
