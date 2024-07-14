@@ -31,6 +31,8 @@
     <!-- Custom-js include -->
     <script src="{{ asset('quiz/assets/js/script.js') }}"></script>
     @yield('scripts')
+
+
 </body>
 
 </html>
