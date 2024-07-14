@@ -38,8 +38,8 @@
                             style="width: {{ (($i + $completedQuestions) / $totalQuestions) * 100 }}%;" aria-valuenow="25"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
-                    <h1 class="question_title px-5 py-3 animate__animated animate__fadeInRight animate_25ms">
-                        {{ $question->question }}</h1>
+                    <h3 class="question_title px-5 py-3 animate__animated animate__fadeInRight animate_25ms">
+                        {{ $question->question }}</h3>
                     @if ($question->type == 'upload')
                         <div class="form_items ps-5">
                             <ul class="list-unstyled p-0">
@@ -138,7 +138,6 @@
                             if (response.status === 'success') {
                                 nextPrev(1);
                             } else if (response.status === 'completed') {
-                                nextPrev(1);
                                 Swal.fire({
                                     icon: "success",
                                     title: "Success!",
