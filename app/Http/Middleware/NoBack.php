@@ -16,7 +16,7 @@ class NoBack
      */
     public function handle(Request $request, Closure $next)
     {
-        if (session('prevent_back', false)) {
+        if (session('prevent_back')) {
             return redirect('/');
         }
 

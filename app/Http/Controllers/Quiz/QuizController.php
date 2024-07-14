@@ -16,7 +16,7 @@ class QuizController extends Controller
 {
     public function index($encryptedUuid)
     {
-        session((['prevent_back' => false]));
+        session()->forget('prevent_back');
         try {
             if (!$encryptedUuid) {
                 return response()->json(['error' => 'Invalid access. UUID missing.'], 400);
@@ -31,7 +31,7 @@ class QuizController extends Controller
             $totalQuestions = $questions->count();
             $remainingQuestions = $questions->whereNotIn('id', $updatedQuestionIds);
             $completedQuestions = $totalQuestions - $remainingQuestions->count();
-            session(['prevent_back' => true]);
+            session()->put('prevent_back', true);
             return view('quiz.quiz', compact('remainingQuestions', 'totalQuestions', 'completedQuestions'));
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'An error occurred while fetching the quiz questions.');
@@ -107,7 +107,7 @@ class QuizController extends Controller
             $username = $checkReg->name ? $checkReg->name : 'User';
             $url = url('/questionnaire/' . urlencode(Crypt::encrypt($uuid)) . '/start');
             SendSaveItLaterEmail::dispatch($email, $username, $url)->delay(now()->addSecond(5));
-            session(['prevent_back' => true]);
+            session()->forget('prevent_back');
             return response()->json(['status' => 'success', 'message' => 'Email sent successfully to save it for later | You can continue the quiz.']);
         } catch (\Exception $e) {
             return response()->json(['status' => 'error', 'message' => 'An error occurred while updating the answer.']);

@@ -30,7 +30,7 @@ Route::get('/', function () {
 
 Route::get('/quiz/registration', [App\Http\Controllers\Quiz\RegistrationController::class, 'index']);
 Route::post('/quiz/registration', [App\Http\Controllers\Quiz\RegistrationController::class, 'save']);
-Route::middleware(['enrolled', 'no-back'])->prefix('questionnaire')->group(function () {
+Route::middleware(['enrolled'])->prefix('questionnaire')->group(function () {
     Route::get('/{uuid}/start', [App\Http\Controllers\Quiz\QuizController::class, 'index']);
 });
 Route::prefix('questionnaire')->group(function () {
