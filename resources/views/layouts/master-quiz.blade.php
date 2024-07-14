@@ -4,9 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset('registration/assets/images/logo.ico') }}" type="image/x-icon" />
     <title>Questionnaire</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('quiz/assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('quiz/assets/css/animate.min.css') }}">
     <link rel="stylesheet" href="{{ asset('quiz/assets/css/style.css') }}">
