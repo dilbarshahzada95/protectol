@@ -128,7 +128,7 @@
                     formData.append('uuid', uuid);
                     formData.append('_token', '{{ csrf_token() }}');
                     Swal.fire({
-                        title: "Registering...",
+                        title: "Saving...",
                         html: "Please wait.",
                         allowOutsideClick: false,
                         didOpen: () => {
@@ -163,6 +163,7 @@
                             }
                         },
                         error: function(xhr) {
+                            Swal.close();
                             let errorMessage = "Something went wrong!";
                             if (xhr.status === 422) {
                                 let errors = xhr.responseJSON.message;
@@ -198,6 +199,14 @@
         }
 
         $('#saveLaterBtn').on('click', function() {
+            Swal.fire({
+                title: "Mailing...",
+                html: "Please wait.",
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                }
+            })
             const uuid = "{{ request()->segment(2) }}";
             $.ajax({
                 url: '/questionnaire/save-later',
@@ -207,6 +216,7 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
+                    Swal.close();
                     if (response.status === 'success') {
                         Swal.fire({
                             icon: "success",
@@ -224,6 +234,7 @@
                     }
                 },
                 error: function(xhr) {
+                    Swal.close();
                     let errorMessage = "Something went wrong!";
                     if (xhr.status === 422) {
                         let errors = xhr.responseJSON.message;
