@@ -15,7 +15,7 @@ class CreateEntrollTable extends Migration
     {
         Schema::create('entroll', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique()->index();
+            $table->string('uuid')->unique();
             $table->enum('status', ['pending', 'completed']);
             $table->softDeletes();
             $table->timestamps();

@@ -15,14 +15,14 @@ class CreateRegisterdUsersTable extends Migration
     {
         Schema::create('registerd_users', function (Blueprint $table) {
             $table->id();
-            $table->string('uuid')->unique()->index();
-            $table->string('name')->index();
-            $table->string('company_name')->index();
-            $table->string('email')->unique()->index();
-            $table->string('country')->nullable()->index();
-            $table->string('phone')->nullable()->index();
+            $table->string('uuid')->unique();
+            $table->string('name');
+            $table->string('company_name');
+            $table->string('email')->unique();
+            $table->string('country')->nullable();
+            $table->string('phone')->nullable();
             $table->text('comments')->nullable();
-            $table->string('batch')->nullable()->index();
+            $table->string('batch')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

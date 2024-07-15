@@ -84,8 +84,8 @@
         </form>
     </div>
     <div class="form_btn py-5 text-center">
-        <button type="button" class="f_btn active text-uppercase rounded-pill text-white" id="nextBtn"
-            onclick="nextPrev(1)">Next & Save Question <i class="fas fa-arrow-right"></i></button>
+        <button type="button" class="f_btn active text-uppercase rounded-pill text-white" id="nextBtn">Next & Save
+            Question <i class="fas fa-arrow-right"></i></button>
         <button type="submit" class="f_btn active text-uppercase rounded-pill text-white" id="saveLaterBtn">Save It
             Later</button>
     </div>
@@ -127,6 +127,14 @@
 
                     formData.append('uuid', uuid);
                     formData.append('_token', '{{ csrf_token() }}');
+                    Swal.fire({
+                        title: "Registering...",
+                        html: "Please wait.",
+                        allowOutsideClick: false,
+                        didOpen: () => {
+                            Swal.showLoading();
+                        }
+                    })
 
                     $.ajax({
                         url: '/questionnaire/update',
@@ -135,6 +143,7 @@
                         processData: false,
                         contentType: false,
                         success: function(response) {
+                            Swal.close();
                             if (response.status === 'success') {
                                 nextPrev(1);
                             } else if (response.status === 'completed') {

@@ -12,8 +12,8 @@
                     <!-- side -->
                     <div class="left">
                         <article class="side-text">
-                            <h2>Let's register and quiz together!</h2>
-                            <p>For support <span>dilbar@fms.com</span></p>
+                            <h2>Heat Awareness Campaign!</h2>
+
                         </article>
                         <div class="left-img">
                             <img src="{{ asset('registration/assets/images/left-bg.gif') }}" alt="gif" />
@@ -125,73 +125,66 @@
                 }
 
                 if (!valid) {
-                    return; // Stop form submission if validation fails
+                    return;
                 }
 
-                let timerInterval;
                 Swal.fire({
                     title: "Registering...",
                     html: "Please wait.",
-                    timer: 2000,
-                    timerProgressBar: true,
+                    allowOutsideClick: false,
                     didOpen: () => {
                         Swal.showLoading();
-                        const timer = Swal.getHtmlContainer().querySelector("b");
-                        timerInterval = setInterval(() => {
-                            timer.textContent = Swal.getTimerLeft();
-                        }, 100);
-                    },
-                    willClose: () => {
-                        clearInterval(timerInterval);
                     }
-                }).then((result) => {
-                    $.ajax({
-                        url: "/quiz/registration",
-                        type: "POST",
-                        data: {
-                            "_token": "{{ csrf_token() }}",
-                            name: name,
-                            company_name: company_name,
-                            country: country,
-                            phone: phone,
-                            email: email,
-                            comments: comments
-                        },
-                        success: function(response) {
-                            if (response.status === true) {
-                                Swal.fire({
-                                    icon: "success",
-                                    title: "Success!",
-                                    text: response.message,
-                                }).then(() => {
-                                    window.open(response.url, '_blank');
-                                });
-                            } else {
-                                Swal.fire({
-                                    icon: "error",
-                                    title: "Oops...",
-                                    text: response.message,
-                                });
-                            }
+                })
 
-                            $('#regForms').trigger("reset");
-
-                        },
-                        error: function(xhr, status, error) {
-                            let errorMessage = "Something went wrong!";
-                            if (xhr.status === 422) {
-                                let errors = xhr.responseJSON.message;
-                                errorMessage = Object.values(errors).map(error => error
-                                    .join(' ')).join('<br>');
-                            }
+                $.ajax({
+                    url: "/quiz/registration",
+                    type: "POST",
+                    data: {
+                        "_token": "{{ csrf_token() }}",
+                        name: name,
+                        company_name: company_name,
+                        country: country,
+                        phone: phone,
+                        email: email,
+                        comments: comments
+                    },
+                    success: function(response) {
+                        Swal.close();
+                        if (response.status === true) {
+                            Swal.fire({
+                                icon: "success",
+                                title: "Success!",
+                                text: response.message,
+                            }).then(() => {
+                                window.open(response.url, '_blank');
+                            });
+                        } else {
                             Swal.fire({
                                 icon: "error",
-                                title: "Validation Error",
-                                html: errorMessage,
+                                title: "Oops...",
+                                text: response.message,
                             });
-
                         }
-                    });
+
+                        $('#regForms').trigger("reset");
+
+                    },
+                    error: function(xhr, status, error) {
+                        Swal.close();
+                        let errorMessage = "Something went wrong!";
+                        if (xhr.status === 422) {
+                            let errors = xhr.responseJSON.message;
+                            errorMessage = Object.values(errors).map(error => error
+                                .join(' ')).join('<br>');
+                        }
+                        Swal.fire({
+                            icon: "error",
+                            title: "Validation Error",
+                            html: errorMessage,
+                        });
+
+                    }
                 });
             });
 
